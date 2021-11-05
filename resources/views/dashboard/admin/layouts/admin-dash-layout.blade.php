@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>@yield('title')</title>
   <base href="{{\URL::to('/')}}">
 
-  <link href="img/Logo-Al-Azhar-Transparent.png" rel="icon">
+  <link href="img/imapala.png" rel="icon">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -25,7 +25,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
   <link type="text/css" href='https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css' rel='stylesheet'>
   <link type="text/css" href='https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css' rel='stylesheet'>
-  <link rel="shortcut icon" href="img/mdw-logo.jpg">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <link rel="shortcut icon" href="img/imapala.png">
+  <!-- leafletjs -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -58,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{\URL::to('/admin/dashboard')}}" class="brand-link">
-      <img src="img/mdw-logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="img/imapala.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Dashboard</span>
     </a>
 
@@ -88,14 +97,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.data')}}" class="nav-link {{(request()->is('admin/data'))? 'active':''}}">
-              <i class="nav-icon fas fa-users"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
               <p>
-               Master Data
+                Master Data
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.kecamatan')}}" class="nav-link {{(request()->is('admin/kecamatan'))? 'active':''}}">
+                  <i class="fas fa-cloud nav-icon"></i>
+                  <p>Kecamatan</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.kegiatan')}}" class="nav-link {{(request()->is('admin/kegiatan'))? 'active':''}}">
+                  <i class="fas fa-cloud nav-icon"></i>
+                  <p>Nama Kegiatan</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <a href="{{route('admin.akun')}}" class="nav-link {{(request()->is('admin/akun'))? 'active':''}}">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -108,39 +134,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <i class="nav-icon fas fa-cog"></i>
               <p>
                List Akun Admin
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('admin.profile')}}" class="nav-link {{(request()->is('admin/profile'))? 'active':''}}">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-               Profile
              </p>
            </a>
-         </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
-            <i class="nav-icon fas fa-cog"></i>
-            {{ __('Logout') }}
-          </a>
+         </li> -->
+         <li class="nav-item">
+          <a href="{{route('admin.profile')}}" class="nav-link {{(request()->is('admin/profile'))? 'active':''}}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+             Profile
+           </p>
+         </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+        <i class="nav-icon fas fa-cog"></i>
+        {{ __('Logout') }}
+      </a>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-          </form>
-        </li>
-      </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-  </div>
-  <!-- /.sidebar -->
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+      </form>
+    </li>
+  </ul>
+</nav>
+<!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
 </aside>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
- @yield('content')
+ <div class="container">
+   @yield('content')
+ </div>
 </div>
 <!-- /.content-wrapper -->
 
@@ -157,11 +185,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Main Footer -->
 <footer class="main-footer">
   <!-- To the right -->
-  <div class="float-right d-none d-sm-inline">
+  <!-- <div class="float-right d-none d-sm-inline">
     Anything you want
-  </div>
+  </div> -->
   <!-- Default to the left -->
-  <strong>Copyright &copy; 2021 <a href="{{route('admin.dashboard')}}" target="_blank">Test Project Laravel 8</a> </strong> All rights reserved.
+  <strong>Copyright &copy; 2021 <a href="{{route('admin.dashboard')}}" target="_blank">Aplikasi Rekam Jejak Dokumentasi Kegiatan IMAPALA UHAMKA</a> </strong> All rights reserved.
 </footer>
 </div>
 <!-- ./wrapper -->
@@ -170,12 +198,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
- <!-- Datatables JS -->
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
-  <script>
+<!-- Datatables JS -->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+<script>
   $(document).ready(function() {
     $('#userTable').DataTable( {
       dom: 'Bfrtip',
@@ -191,12 +219,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <script>
-        window.setTimeout(function() {
-            $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                $(this).remove();
-            });
-        }, 3000);
-    </script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 3000);
+</script>
 <script>
   $.ajaxSetup({
    headers:{
@@ -280,5 +308,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   });
 </script>
+<!-- bootstrap color picker -->
+<script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script>
+   //color picker with addon
+   $('.my-colorpicker2').colorpicker()
+ </script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 	<title>Register Page</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/my-login.css">
-	<link rel="shortcut icon" href="img/mdw-logo.jpg">
+	<link rel="shortcut icon" href="img/imapala.png">
 </head>
 <body class="my-login-page">
 	<section class="h-100">
@@ -16,7 +16,7 @@
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="brand">
-						<img src="img/mdw-logo.jpg" alt="bootstrap 4 login page">
+						<img src="img/imapala.png" alt="logo">
 					</div>
 					<div class="card fat">
 						<div class="card-body">

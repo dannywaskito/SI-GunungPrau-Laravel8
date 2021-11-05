@@ -18,12 +18,14 @@ class CreateUserSeeder extends Seeder
             [
                 'name'=>'Admin',
                 'email'=>'dannywaskito10@gmail.com',
+                'no_hp'=>'089502516131',
                 'role'=>'1',
                 'password'=>bcrypt('rahasia123'),
             ],
             [
                 'name'=>'User',
                 'email'=>'waskitodanny14@gmail.com',
+                'no_hp'=>'089502516131',
                 'role'=>'2',
                 'password'=>bcrypt('rahasia123'),
             ]

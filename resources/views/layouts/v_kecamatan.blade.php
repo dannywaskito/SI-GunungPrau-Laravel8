@@ -5,22 +5,17 @@
 
 <div id="map" style="width: 100%; height: 400px;"></div>
 
-<div class="col-sm-12">
+<div class="container">
+	<div class="col-sm-12">
 	<div class="text-center">
-		<h3>Data Kegiatan</h3>
+		<h3>Data Kegiatan {{$title}}</h3>
 	</div>
 	    <table id="userTable" class="display responsive nowrap" style="width:100%">
       <thead>
         <tr>
           <th width="60px">No</th>
           <th>Nama Kegiatan</th>
-          <th>Foto Kegiatan</th>
-          <th>Kecamatan</th>
-          <th>Alamat</th>
-          <th>Posisi</th>
-          <th>Keterangan</th>
-          <th>Jumlah Anggota</th>
-          <th>Waktu</th>
+          <th>Waktu Pelaksaan</th>
           <th>Tanggal Posting</th>
         </tr>
       </thead>
@@ -30,18 +25,13 @@
         <tr>
           <td>{{$no++}}</td>
           <td>{{$data->nama_kegiatan}}</td>
-          <td><img src="{{url('foto_kegiatan/'.$data->foto_kegiatan)}}" alt="" width="100" height="100"></td>
-          <td>{{$data->kecamatan}}</td>
-          <td>{{$data->alamat}}</td>
-          <td>{{$data->posisi}}</td>
-          <td>{{$data->ket}}</td>
-          <td>{{$data->jml_anggota}}</td>
           <td>{{date('d F Y', strtotime($data->waktu))}}</td>
           <td>{{date('d F Y', strtotime($data->created_at))}}</td>
         </tr>
         @endforeach
       </tbody>
     </table>
+</div>
 </div>
 
 
@@ -101,6 +91,10 @@
 	}).addTo(data{{$kec->id_kecamatan}}).bindPopup("{{$kec->kecamatan}}");
 
 	map.fitBounds(kec.getBounds());
-
+@foreach($kegiatan as $data)
+L.marker([<?=$data->posisi ?>])
+.addTo(map).bindPopup(
+		'<table><tr><th>Nama Kegiatan<td>{{$data->nama_kegiatan}}</tr></td><tr><th>Waktu Kegiatan<td>{{date('d F Y', strtotime($data->waktu))}}</tr></td><tr><th>Tanggal Posting Kegiatan<td>{{date('d F Y', strtotime($data->created_at))}}</tr></td></th></table><a href="/detailkegiatan/{{$data->id_kegiatan}}" class="btn btn-sm btn-default">Info Detail</a>');
+@endforeach
 </script>
 @endsection

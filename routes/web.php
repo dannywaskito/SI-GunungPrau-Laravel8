@@ -74,4 +74,5 @@ Route::group(['prefix'=>'user','middleware'=>['isUser','auth','PreventBackHistor
 
 // front end
  Route::get('kecamatan/{id_kecamatan}', [WebController::class, 'kecamatan']);
+ Route::get('detailkegiatan/{id_kegiatan}', [WebController::class, 'detailkegiatan']);
 

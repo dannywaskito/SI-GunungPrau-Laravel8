@@ -27,4 +27,20 @@ class WebModel extends Model
         ->where('tbl_kegiatan.id_kecamatan', $id_kecamatan)
         ->get();
     }
+    
+    public function AllDataKegiatan()
+    {
+         return DB::table('tbl_kegiatan')
+        ->join('tbl_kecamatan','tbl_kecamatan.id_kecamatan','=','tbl_kegiatan.id_kecamatan')
+        ->get();
+    }
+
+    public function DetailDataKegiatan($id_kegiatan)
+    {
+         return DB::table('tbl_kegiatan')
+        ->join('tbl_kecamatan','tbl_kecamatan.id_kecamatan','=','tbl_kegiatan.id_kecamatan')
+        ->where('id_kegiatan', $id_kegiatan)
+         ->first();
+    }
+
 }

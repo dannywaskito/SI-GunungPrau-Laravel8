@@ -16,20 +16,30 @@ class WebController extends Controller
    {
       $data = [
           'title' => 'Aplikasi Rekam Jejak Dokumentasi Kegiatan IMAPALA UHAMKA',
-       'kecamatan' => $this->WebModel->DataKecamatan(),
-  ];
-  return view('layouts.v_web', $data);
+          'kecamatan' => $this->WebModel->DataKecamatan(),
+          'kegiatan' => $this->WebModel->AllDataKegiatan(),
+     ];
+     return view('layouts.v_web', $data);
 }
 
 public function kecamatan($id_kecamatan)
 {
      $kec = $this->WebModel->DetailKecamatan($id_kecamatan);
-   $data = [
-     'title' =>'Kecamatan ' . $kec->kecamatan,
+     $data = [
+          'title' =>'Kecamatan ' . $kec->kecamatan,
+          'kecamatan' => $this->WebModel->DataKecamatan(),
+          'kegiatan' => $this->WebModel->DataKegiatan($id_kecamatan),
+          'kec' => $kec,
+     ];
+     return view('layouts.v_kecamatan', $data);
+}
+public function detailkegiatan($id_kegiatan)
+{    $kegiatan = $this->WebModel->DetailDataKegiatan($id_kegiatan);
+    $data = [
+     'title' =>'Detail Kegiatan '. $kegiatan->nama_kegiatan,
      'kecamatan' => $this->WebModel->DataKecamatan(),
-     'kegiatan' => $this->WebModel->DataKegiatan($id_kecamatan),
-     'kec' => $kec,
+     'kegiatan' => $kegiatan,
 ];
-return view('layouts.v_kecamatan', $data);
+return view('layouts.v_detailkegiatan', $data);
 }
 }

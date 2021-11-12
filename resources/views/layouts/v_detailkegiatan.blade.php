@@ -1,13 +1,60 @@
 @extends('layouts.frontend')
+@section('title','Detail Kegiatan')
 @section('content')
 
+<div class="col-sm-6">
+	<div id="map" style="width: 100%; height: 400px;"></div>
+</div>
+<div class="col-sm-6">
+	<img src="{{url('foto_kegiatan/'.$kegiatan->foto_kegiatan)}}" width="100%" height="100%">
+</div>
 
-
-<div id="map" style="width: 100%; height: 400px;"></div>
-
-
-
-
+<div class="col-sm-12">
+	<div class="container">
+		<table id="userTable" class="display responsive nowrap" style="width:100%">
+        <tr>
+          <td>Nama Kegiatan</td>
+          <td>:</td>
+          <td>{{$kegiatan->nama_kegiatan}}</td>
+        </tr>
+         <tr>
+          <td>Kecamatan</td>
+          <td>:</td>
+          <td>{{$kegiatan->kecamatan}}</td>
+        </tr>
+         <tr>
+          <td>Alamat</td>
+          <td>:</td>
+          <td>{{$kegiatan->alamat}}</td>
+        </tr>
+         <tr>
+          <td>Posisi Koordinat</td>
+          <td>:</td>
+          <td>{{$kegiatan->posisi}}</td>
+        </tr>
+        <tr>
+          <td>Keterangan Kegiatan</td>
+          <td>:</td>
+          <td>{{$kegiatan->ket}}</td>
+        </tr>
+        <tr>
+          <td>Jumlah Anggota</td>
+          <td>:</td>
+          <td>{{$kegiatan->jml_anggota}}</td>
+        </tr>
+        <tr>
+          <td>Waktu Kegiatan</td>
+          <td>:</td>
+          <td>{{date('d F Y', strtotime($kegiatan->waktu))}}</td>
+        </tr>
+        <tr>
+          <td>Tanggal Diposting</td>
+          <td>:</td>
+          <td>{{date('d F Y', strtotime($kegiatan->created_at))}}</td>
+        </tr>
+	</table>
+	</div>
+</div>
 <script>
 	var peta1 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -35,18 +82,10 @@
 		id: 'mapbox/dark-v10'
 	});
 
-	@foreach($kecamatan as $data)
-	var data{{$data->id_kecamatan}} = L.layerGroup();
-	@endforeach
-	
 	var map = L.map('map', {
-		center: [-6.196089733168616, 106.7723254288071],
+		center: [{{$kegiatan->posisi}}],
 		zoom: 9,
-		layers: [peta2, 
-		@foreach($kecamatan as $data)
-		data{{$data->id_kecamatan}},
-		@endforeach
-]
+		layers: [peta2],
 	});
 	var baseMaps = {
 		"Grayscale": peta1,
@@ -54,27 +93,6 @@
 		"Streets": peta3,
 		"Dark": peta4,
 	};
-	var overlayer = {
-		@foreach($kecamatan as $data)
-		"{{$data->kecamatan}}" : data{{$data->id_kecamatan}},
-		@endforeach
-	}
-	L.control.layers(baseMaps, overlayer).addTo(map);
-
-	@foreach($kecamatan as $data)
-	L.geoJson(<?=$data->geojson ?>,{
-		style:{
-			color:'white',
-			fillColor: '{{$data->warna}}',
-			fillOpacity:1.0,
-		}
-	}).addTo(data{{$data->id_kecamatan}}).bindPopup("{{$data->kecamatan}}");
-	@endforeach
-
-@foreach($kegiatan as $data)
-L.marker([<?=$data->posisi ?>])
-.addTo(map).bindPopup(
-		'<table><tr><th>Nama Kegiatan<td>{{$data->nama_kegiatan}}</tr></td><tr><th>Waktu Kegiatan<td>{{date('d F Y', strtotime($data->waktu))}}</tr></td><tr><th>Tanggal Posting Kegiatan<td>{{date('d F Y', strtotime($data->created_at))}}</tr></td></th></table><a href="/detailkegiatan/{{$data->id_kegiatan}}" class="btn btn-sm btn-default">Info Detail</a>');
-@endforeach
-</script>
+	L.marker([<?=$kegiatan->posisi ?>]).addTo(map);
+	</script>
 @endsection

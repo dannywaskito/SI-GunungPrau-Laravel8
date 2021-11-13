@@ -90,14 +90,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('user.data')}}" class="nav-link {{(request()->is('user/data'))? 'active':''}}">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-               Master Data
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="{{route('user.profile')}}" class="nav-link {{(request()->is('user/profile'))? 'active':''}}">
               <i class="nav-icon fas fa-user"></i>
               <p>

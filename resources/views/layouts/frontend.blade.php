@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link type="text/css" href='https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css' rel='stylesheet'>
   <link type="text/css" href='https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css' rel='stylesheet'>
   <link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
-  <link rel="shortcut icon" href="img/imapala.png">
+  <link rel="shortcut icon" href="{{url('img')}}/imapala.png">
   <!-- jQuery -->
   <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
@@ -68,21 +68,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li><a href="/kecamatan/{{$data->id_kecamatan}}" class="dropdown-item">{{$data->kecamatan}} </a></li>
                 @endforeach
               </ul>
-                <li class="nav-item">
-                  <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">Tentang Aplikasi</a>
-                </li>
-              </ul>
-
-            </div>
-
-            <!-- Right navbar links -->
-            <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="{{route('login')}}">
-                  <i class="fas fa-users"></i> Login
-                </a>
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">Tentang Aplikasi</a>
               </li>
+
             </ul>
+
+          </div>
+
+          <!-- Right navbar links -->
+          <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('login')}}">
+                <i class="fas fa-users"></i> Login
+              </a>
+            </li>
+            @auth
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                Selamat Datang, {{auth()->user()->name}} 
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @if(auth()->user()->role == 1)
+                <a class="dropdown-item" href="{{\URL::to('/admin/dashboard')}}">Dashboard</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+                @else(auth()->user()->role == 2)
+                <a class="dropdown-item" href="{{\URL::to('/user/dashboard')}}">Dashboard</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+              </div>
+            </li>
+            @endif
+
+            @endauth
+
+
+
           </div>
         </nav>
         <!-- /.navbar -->
@@ -135,11 +165,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </html>
 
 <!-- Datatables JS -->
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
-  <script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+<script>
   $(document).ready(function() {
     $('#userTable').DataTable( {
       dom: 'Bfrtip',

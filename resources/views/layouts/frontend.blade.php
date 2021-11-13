@@ -78,11 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <!-- Right navbar links -->
           <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('login')}}">
-                <i class="fas fa-users"></i> Login
-              </a>
-            </li>
+
             @auth
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -97,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                   @csrf
                 </form>
-                @else(auth()->user()->role == 2)
+                @elseif(auth()->user()->role == 2)
                 <a class="dropdown-item" href="{{\URL::to('/user/dashboard')}}">Dashboard</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
@@ -107,8 +103,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </form>
               </div>
             </li>
+            
             @endif
-
+            @else
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('login')}}">
+                <i class="fas fa-users"></i> Login
+              </a>
+            </li>
             @endauth
 
 

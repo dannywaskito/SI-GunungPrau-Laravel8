@@ -9,7 +9,7 @@
           <th>Nama Kegiatan</th>
           <th>Foto Kegiatan</th>
           <th>Kecamatan</th>
-          <th class="text-center">Waktu</th>
+          <th class="text-center">Waktu Kegiatan</th>
           <th>Tanggal Posting</th>
           <th>Aksi</th>
         </tr>

@@ -42,4 +42,15 @@ public function detailkegiatan($id_kegiatan)
 ];
 return view('layouts.v_detailkegiatan', $data);
 }
+public function listkegiatan()
+   {
+     
+      $data = [
+          'title' => 'List Gallery Kegiatan IMAPALA UHAMKA',
+          'kecamatan' => $this->WebModel->DataKecamatan(),
+          'kegiatan' => $this->WebModel->AllDataKegiatan(),
+     ];
+     return view('layouts.v_list', $data);
+
+}
 }

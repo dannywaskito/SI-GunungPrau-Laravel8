@@ -10,6 +10,7 @@
 </div>
 
 <div class="col-sm-12">
+	<br><br>
 	<div class="container">
 		<table id="userTable" class="display responsive nowrap" style="width:100%">
         <tr>
@@ -35,7 +36,7 @@
         <tr>
           <td>Keterangan Kegiatan</td>
           <td>:</td>
-          <td>{{$kegiatan->ket}}</td>
+          <td><textarea name="alamat" rows="7" class="form-control">{{$kegiatan->ket}}</textarea></td>
         </tr>
         <tr>
           <td>Jumlah Anggota</td>
@@ -53,6 +54,7 @@
           <td>{{date('d F Y', strtotime($kegiatan->created_at))}}</td>
         </tr>
 	</table>
+	<br>
 	</div>
 </div>
 <script>
@@ -84,7 +86,7 @@
 
 	var map = L.map('map', {
 		center: [{{$kegiatan->posisi}}],
-		zoom: 9,
+		zoom: 15,
 		layers: [peta1],
 	});
 	var baseMaps = {

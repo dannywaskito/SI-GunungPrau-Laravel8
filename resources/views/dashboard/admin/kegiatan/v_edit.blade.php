@@ -150,7 +150,7 @@
 	var map = L.map('map', {
 		center: [{{$kegiatan->posisi}}],
 		zoom: 9,
-		layers: [peta2],
+		layers: [peta1],
 	});
 	var baseMaps = {
 		"Grayscale": peta1,

@@ -61,6 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="nav-item">
               <a href="/" class="nav-link">Home</a>
             </li>
+            @auth
             <li class="nav-item dropdown">
               <a id="dropdownSubMenu1" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Kecamatan</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -68,6 +69,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li><a href="/kecamatan/{{$data->id_kecamatan}}" class="dropdown-item">{{$data->kecamatan}} </a></li>
                 @endforeach
               </ul>
+              <li class="nav-item">
+                <a href="/listkegiatan" class="nav-link">List Gallery</a>
+              </li>
+              @endauth
+              
               <li class="nav-item">
                 <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">Tentang Aplikasi</a>
               </li>
@@ -153,7 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Main Footer -->
       <footer class="main-footer">
         <!-- To the right -->
-    <<!-- div class="float-right d-none d-sm-inline">
+   <!--  <div class="float-right d-none d-sm-inline">
       Anything you want
     </div> -->
     <!-- Default to the left -->

@@ -72,6 +72,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="/listkegiatan" class="nav-link">List Gallery</a>
               </li>
+              <li class="nav-item">
+                <a href="/kritik" class="nav-link">Kritik & Saran</a>
+              </li>
               @endauth
               
               <li class="nav-item">
@@ -88,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             @auth
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                Selamat Datang, {{auth()->user()->name}} 
+                <i class="fa fa-user"></i> Selamat Datang, {{auth()->user()->name}} 
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if(auth()->user()->role == 1)

@@ -59,19 +59,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Left navbar links -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a href="/" class="nav-link">Home</a>
-            </li>
+                <a href="/listkegiatan" class="nav-link">List Gallery</a>
+              </li>
             @auth
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
               <a id="dropdownSubMenu1" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Kecamatan</a>
               <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                 @foreach($kecamatan as $data)
                 <li><a href="/kecamatan/{{$data->id_kecamatan}}" class="dropdown-item">{{$data->kecamatan}} </a></li>
                 @endforeach
-              </ul>
-              <li class="nav-item">
-                <a href="/listkegiatan" class="nav-link">List Gallery</a>
-              </li>
+              </ul> -->
+              
               <li class="nav-item">
                 <a href="/kritik" class="nav-link">Kritik & Saran</a>
               </li>

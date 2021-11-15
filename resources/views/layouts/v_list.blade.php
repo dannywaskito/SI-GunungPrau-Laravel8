@@ -1,38 +1,37 @@
 @extends('layouts.frontend')
 @section('content')
 
-<div class="col-md-12">
-	<table id="userTable" class="display responsive nowrap" style="width:100%">
-      <thead>
-        <tr>
-          <th width="60px">No</th>
-          <th>Nama Kegiatan</th>
-          <th>Foto Kegiatan</th>
-          <th>Kecamatan</th>
-          <th class="text-center">Waktu Kegiatan</th>
-          <th>Tanggal Posting</th>
-          <th>Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php $no=1; ?>
-        @foreach ($kegiatan as $data)
-        <tr>
-          <td>{{$no++}}</td>
-          <td>{{$data->nama_kegiatan}}</td>
-          <td><img src="{{url('foto_kegiatan/'.$data->foto_kegiatan)}}" alt="" width="100%" height="100%"></td>
-          <td>{{$data->kecamatan}}</td>
-          <td>{{date('d F Y', strtotime($data->waktu))}}</td>
-          <td>{{date('d F Y', strtotime($data->created_at))}}</td>
-          <td>
-            <a href="/detailkegiatan/{{ $data->id_kegiatan}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-eye"></i> Detail Kegiatan</a>
-            <!-- <a href="/admin/hapuskegiatan/{{ $data->id_kegiatan}}" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash"></i></a> -->
-          </td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
-</div>
-    
+<div class="container-fluid">
+	<div class="px-lg-5">
+		<div class="row">
+			<!-- Gallery item -->
+			 @foreach($kegiatan as $data)
+			 <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+        <div class="bg-white rounded shadow-sm"><img src="{{url('foto_kegiatan/'.$data->foto_kegiatan)}}" alt=""class="img-fluid card-img-top" width="100%">
+          <div class="p-4">
+            <h5> <a href="#" class="text-dark">{{$data->nama_kegiatan}}</a></h5>
+            <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+            <div class="d-flex align-items-center justify-content-between px-4 py-2 mt-4">
+               <a href="/detailkegiatan/{{ $data->id_kegiatan}}" class="badge badge-warning px-4 rounded-pill font-weight-normal"><i class="fa fa-eye"></i> Detail Kegiatan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+       @endforeach
+			<!-- <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+        <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-2.jpg" alt="" class="img-fluid card-img-top">
+          <div class="p-4">
+            <h5> <a href="#" class="text-dark">Blorange</a></h5>
+            <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+            <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+              <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">PNG</span></p>
+              <div class="badge badge-primary px-3 rounded-pill font-weight-normal">Trend</div>
+            </div>
+          </div>
 
-@endsection
+        </div>
+      </div>
+		</div>
+	</div> -->
+
+	@endsection

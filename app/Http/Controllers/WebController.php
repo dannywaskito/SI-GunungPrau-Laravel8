@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WebModel;
+use App\Models\User;
+use App\Models\Kritik;
+use Auth;
 
 
 class WebController extends Controller
@@ -11,6 +14,8 @@ class WebController extends Controller
      public function __construct()
      {
         $this->WebModel = new WebModel();
+         $this->User = new User();
+          $this->Kritik = new Kritik();
    }
    public function index()
    {
@@ -52,5 +57,29 @@ public function listkegiatan()
      ];
      return view('layouts.v_list', $data);
 
+}
+public function kritik()
+   {
+     
+      $data = [
+          'title' => 'Kritik & Saran',
+         
+     ];
+     return view('layouts.v_kritik', $data);
+
+}
+function insertKritik(Request $request){
+    $request->validate([
+        'pesan'=>['required'],
+
+    ]);
+    $kritik = new Kritik();
+    $kritik->pesan = $request->pesan;
+    $kritik->user_id = Auth::user()->id;
+    if ($kritik->save()) {
+        return redirect()->route('kritik')->with('pesan','Pesan Anda Berhasil di Kirim');
+    }else{
+        return redirect()->back()->with('error','Gagal Kirim, Silahkan Coba Lagi');
+    }
 }
 }

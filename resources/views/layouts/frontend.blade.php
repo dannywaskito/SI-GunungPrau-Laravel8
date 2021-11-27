@@ -62,13 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="/listkegiatan" class="nav-link">List Gallery</a>
               </li>
             @auth
-            <!-- <li class="nav-item dropdown">
-              <a id="dropdownSubMenu1" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Kecamatan</a>
-              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                @foreach($kecamatan as $data)
-                <li><a href="/kecamatan/{{$data->id_kecamatan}}" class="dropdown-item">{{$data->kecamatan}} </a></li>
-                @endforeach
-              </ul> -->
+
               
               <li class="nav-item">
                 <a href="/kritik" class="nav-link">Kritik & Saran</a>
@@ -188,6 +182,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     } );
   } );
 </script>
+<!-- Alert timeout -->
+<script>
+  window.setTimeout(function(){
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove();
+    });
+  }, 3000);
+</script> 
+<!-- EndAlert timeout -->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

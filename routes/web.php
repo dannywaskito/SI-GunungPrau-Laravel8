@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Models\User;
+use App\Models\Kritik;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -76,4 +77,6 @@ Route::group(['prefix'=>'user','middleware'=>['isUser','auth','PreventBackHistor
  Route::get('kecamatan/{id_kecamatan}', [WebController::class, 'kecamatan']);
  Route::get('detailkegiatan/{id_kegiatan}', [WebController::class, 'detailkegiatan']);
  Route::get('listkegiatan', [WebController::class, 'listkegiatan']);
+  Route::get('kritik', [WebController::class, 'kritik'])->name('kritik');
 
+  Route::post('insertKritik', [WebController::class, 'insertKritik']);

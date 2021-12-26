@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>@yield('title')</title>
   <base href="{{\URL::to('/')}}">
 
-  <link href="img/mdw-logo.jpg" rel="icon">
+  <link href="img/images.PNG" rel="icon">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -27,7 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link type="text/css" href='https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css' rel='stylesheet'>
   <link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="shortcut icon" href="img/mdw-logo.jpg">
+  <link rel="shortcut icon" href="img/images.png">
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -60,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{\URL::to('/user/dashboard')}}" class="brand-link">
-      <img src="img/mdw-logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="img/images.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Dashboard</span>
     </a>
 
@@ -90,30 +90,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('user.daftar')}}" class="nav-link {{(request()->is('user/daftar'))? 'active':''}}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+               Form Pendaftaran
+             </p>
+           </a>
+         </li>
+         <li class="nav-item">
+          <a href="{{route('user.sewa')}}" class="nav-link {{(request()->is('user/sewa'))? 'active':''}}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+             Form Penyewaan Barang
+           </p>
+         </a>
+       </li>
+       <li class="nav-item">
+        <a href="{{route('user.berita')}}" class="nav-link {{(request()->is('user/berita'))? 'active':''}}">
+          <i class="nav-icon fas fa-user"></i>
+          <p>
+          Berita
+         </p>
+       </a>
+     </li>
+     <li class="nav-item">
+      <a href="{{route('user.contact')}}" class="nav-link {{(request()->is('user/contact'))? 'active':''}}">
+        <i class="nav-icon fas fa-phone"></i>
+        <p>
+          Contact Us
+        </p>
+      </a>
+    </li>
+          <!-- <li class="nav-item">
             <a href="{{route('user.profile')}}" class="nav-link {{(request()->is('user/profile'))? 'active':''}}">
               <i class="nav-icon fas fa-user"></i>
               <p>
                Profile
              </p>
            </a>
-         </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
-            <i class="nav-icon fas fa-cog"></i>
-            {{ __('Logout') }}
-          </a>
+         </li> -->
+         <li class="nav-item">
+          <a class="nav-link" href="{{ route('logout') }}"
+          onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">
+          <i class="nav-icon fas fa-cog"></i>
+          {{ __('Logout') }}
+        </a>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-          </form>
-        </li>
-      </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
-  </div>
-  <!-- /.sidebar -->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+          @csrf
+        </form>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
 </aside>
 
 <!-- Content Wrapper. Contains page content -->
@@ -139,7 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     Anything you want
   </div>
   <!-- Default to the left -->
-  <strong>Copyright &copy; 2021 <a href="{{route('user.dashboard')}}" target="_blank">Test Project Laravel 8</a> </strong> All rights reserved.
+  <strong>Copyright &copy; 2021 <a href="{{route('user.dashboard')}}" target="_blank">Website Pendakian Gunung Prau (Via Kalilembu)</a> </strong> All rights reserved.
 </footer>
 </div>
 <!-- ./wrapper -->
@@ -148,12 +180,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
- <!-- Datatables JS -->
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
-  <script>
+<!-- Datatables JS -->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+<script>
   $(document).ready(function() {
     $('#userTable').DataTable( {
       dom: 'Bfrtip',
@@ -173,15 +205,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
   $(document).ready(function() {
     $('#list').select2();
-});
+  });
 </script>
 <script>
-        window.setTimeout(function() {
-            $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                $(this).remove();
-            });
-        }, 3000);
-    </script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 3000);
+</script>
 <script>
   $.ajaxSetup({
    headers:{

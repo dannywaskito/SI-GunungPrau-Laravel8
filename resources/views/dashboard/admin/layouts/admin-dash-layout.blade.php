@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-<!-- Datatables -->
+  <!-- Datatables -->
   <link rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
   <link type="text/css" href='https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css' rel='stylesheet'>
   <link type="text/css" href='https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css' rel='stylesheet'>
@@ -68,7 +68,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{\URL::to('/admin/dashboard')}}" class="brand-link">
-      <img src="img/imapala.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="img/images.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Dashboard</span>
     </a>
 
@@ -107,22 +107,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.kecamatan')}}" class="nav-link {{(request()->is('admin/kecamatan'))? 'active':''}}">
-                  <i class="fas fa-cloud nav-icon"></i>
-                  <p>Kecamatan</p>
+                <a href="{{route('admin.berita')}}" class="nav-link {{(request()->is('admin/berita'))? 'active':''}}">
+                  <i class="fa fa-book nav-icon"></i>
+                  <p>Berita</p>
                 </a>
               </li>
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.kegiatan')}}" class="nav-link {{(request()->is('admin/kegiatan'))? 'active':''}}">
-                  <i class="fas fa-cloud nav-icon"></i>
-                  <p>Nama Kegiatan</p>
+               <a href="{{route('admin.pendaki')}}" class="nav-link {{(request()->is('admin/pendaki'))? 'active':''}}">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Data Pendaki</p>
+                </a>
+              </li>
+            </ul>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('admin.penyewaan')}}" class="nav-link {{(request()->is('admin/penyewaan'))? 'active':''}}">
+                  <i class="fas fa-cog nav-icon"></i>
+                  <p>Data Penyewaan</p>
                 </a>
               </li>
             </ul>
           </li>
-<!--           <li class="nav-item">
+   <!--        <li class="nav-item">
             <a href="{{route('admin.akun')}}" class="nav-link {{(request()->is('admin/akun'))? 'active':''}}">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -130,19 +138,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
-          <li class="nav-item">
+ -->          <li class="nav-item">
             <a href="{{route('admin.user')}}" class="nav-link {{(request()->is('admin/user'))? 'active':''}}">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                List Akun Admin
              </p>
            </a>
-         </li> -->
+         </li>
          <li class="nav-item">
-          <a href="{{route('admin.profile')}}" class="nav-link {{(request()->is('admin/profile'))? 'active':''}}">
+          <a href="{{route('admin.contact')}}" class="nav-link {{(request()->is('admin/contact'))? 'active':''}}">
             <i class="nav-icon fas fa-user"></i>
             <p>
-             Profile
+             Contact Us
            </p>
          </a>
        </li>
@@ -190,7 +198,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     Anything you want
   </div> -->
   <!-- Default to the left -->
-  <strong>Copyright &copy; 2021 <a href="{{route('admin.dashboard')}}" target="_blank">Aplikasi Rekam Jejak Dokumentasi Kegiatan IMAPALA UHAMKA</a> </strong> All rights reserved.
+  <strong>Copyright &copy; 2021 <a href="{{route('admin.dashboard')}}" target="_blank">Gunung Prau</a> </strong> All rights reserved.
 </footer>
 </div>
 <!-- ./wrapper -->
@@ -200,11 +208,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Datatables JS -->
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
-  <script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+<script>
   $(document).ready(function() {
     $('#userTable').DataTable( {
       dom: 'Bfrtip',

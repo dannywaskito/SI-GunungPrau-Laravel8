@@ -8,6 +8,10 @@ use Auth;
 use App\Models\User;
 use App\Models\KecamatanModel;
 use App\Models\KegiatanModel;
+use App\Models\ContactModel;
+use App\Models\BeritaModel;
+use App\Models\PendakianModel;
+use App\Models\PenyewaanModel;
 
 class AdminController extends Controller
 {
@@ -15,231 +19,223 @@ class AdminController extends Controller
     {
      $this->KecamatanModel = new KecamatanModel();
      $this->KegiatanModel = new KegiatanModel();
+     $this->ContactModel = new ContactModel();
+     $this->BeritaModel = new BeritaModel();
+     $this->PendakianModel = new PendakianModel();
+     $this->PenyewaanModel = new PenyewaanModel();
  }
     //
  function index()
  {
+
     return view('dashboard.admin.index');
 }
+function contact()
+{
+    $data = [
+        'contact' => $this->ContactModel->AllData(),
+    ];
+    return view('dashboard.admin.contact.index', $data);
+}
+function addContact()
+{
+    $data = [
+        'contact' => $this->ContactModel->AllData(),
+    ];
+    return view('dashboard.admin.contact.v_add', $data);
+}
+// Berita
+function berita()
+{
 
-// Kecamatan
-function kecamatan()
+    $data = [
+        'berita' => $this->BeritaModel->AllData(),
+    ];
+    return view('dashboard.admin.berita.index', $data);
+}
+function addBerita()
 {
     $data = [
-        'kecamatan' => $this->KecamatanModel->AllData(),
+        'berita' => $this->BeritaModel->AllData(),
     ];
-    return view('dashboard.admin.kecamatan.index', $data);
+    return view('dashboard.admin.berita.v_add', $data);
 }
-function addKecamatan()
-{
-    $data = [
-        'kecamatan' => $this->KecamatanModel->AllData(),
-    ];
-    return view('dashboard.admin.kecamatan.v_add', $data);
-}
-function insertKecamatan(Request $request)
+function insertContact(Request $request)
 {
    $request->validate([
-    'kecamatan'=>'required',
-    'warna'=>'required',
-    'geojson'=>'required',
+    'email'=>'required',
+    'notelp'=>'required',
 
 ],
 [
-    'kecamatan.required' => 'Wajib Diisi !!',
-    'warna.required' => 'Wajib Diisi !!',
-    'geojson.required' => 'Wajib Diisi !!',
+    'email.required' => 'Wajib Diisi !!',
+    'notelp.required' => 'Wajib Diisi !!',
 ]
 );
    $data = [
-    'kecamatan' => Request()->kecamatan,
-    'warna' => Request()->warna,
-    'geojson' => Request()->geojson,
+    'email' => Request()->email,
+    'notelp' => Request()->notelp,
 ];
-$this->KecamatanModel->insertData($data);
-return redirect()->route('admin.kecamatan')->with('pesan','Kecamatan Berhasil ditambahkan!!');
+$this->ContactModel->insertData($data);
+return redirect()->route('admin.contact')->with('pesan','Contact Berhasil ditambahkan!!');
 }
-function editKecamatan($id_kecamatan)
-{
-    $data = [
-      'kecamatan' => $this->KecamatanModel->detailData($id_kecamatan),
-  ];
-  return view('dashboard.admin.kecamatan.v_edit',$data);
-}
-function updateKecamatan($id_kecamatan)
-{
-    {
-       Request()->validate([
-        'kecamatan'=>'required',
-        'warna'=>'required',
-        'geojson'=>'required',
 
-    ],
-    [
-        'kecamatan.required' => 'Wajib Diisi !!',
-        'warna.required' => 'Wajib Diisi !!',
-        'geojson.required' => 'Wajib Diisi !!',
-    ]
-);
-       $data = [
-        'kecamatan' => Request()->kecamatan,
-        'warna' => Request()->warna,
-        'geojson' => Request()->geojson,
-    ];
-    $this->KecamatanModel->updateData($id_kecamatan, $data);
-    return redirect()->route('admin.kecamatan')->with('pesan','Kecamatan Berhasil diubah!!');
-}
-}
-function hapusKecamatan($id_kecamatan)
-{
-    $this->KecamatanModel->DeleteData($id_kecamatan);
-    return redirect()->route('admin.kecamatan')->with('pesan','Kecamatan Berhasil dihapus!!');
-}
-// End Kecamatan
-// Kegiatan
-function kegiatan()
-{
-    $data = [
-        'kegiatan' => $this->KegiatanModel->AllData(),
-    ];
-    return view('dashboard.admin.kegiatan.index', $data);
-}
-function addKegiatan()
-{
-    $data = [
-        'kecamatan' => $this->KecamatanModel->AllData(),
-    ];
-    return view('dashboard.admin.kegiatan.v_add', $data);
-}
-function insertKegiatan(Request $request)
+function insertBerita(Request $request)
 {
    $request->validate([
-    'nama_kegiatan'=>'required',
-    'foto_kegiatan'=>'required|image|mimes:jpeg,png,jpg|max:1024',
-    'id_kecamatan'=>'required',
-    'posisi'=>'required',
-    'ket'=>'required',
-    'waktu'=>'required',
-    'jml_anggota'=>'required',
-    'alamat'=>'required',
+    'judul'=>'required',
+    'foto_berita'=>'required|image|mimes:jpeg,png,jpg|max:1024',
+    'isi'=>'required',
 
 ],
 [
-    'nama_kegiatan.required' => 'Wajib Diisi !!',
-    'foto_kegiatan.required' => 'Wajib Diisi !!',
-    'foto_kegiatan.max' => 'Foto Max 1024 Kb !!!',
-    'foto_kegiatan.image' => 'Foto Harus berformat Jpg, jpeg, dan Png !!!',
-    'id_kecamatan.required' => 'Wajib Diisi !!',
-    'posisi.required' => 'Wajib Diisi !!',
-    'ket.required' => 'Wajib Diisi !!',
-    'waktu.required' => 'Wajib Diisi !!',
-    'jml_anggota.required' => 'Wajib Diisi !!',
-    'alamat.required' => 'Wajib Diisi !!',
+    'judul.required' => 'Wajib Diisi !!',
+    'foto_berita.required' => 'Wajib Diisi !!',
+    'foto_berita.max' => 'Foto Max 1024 Kb !!!',
+    'foto_berita.image' => 'Foto Harus berformat Jpg, jpeg, dan Png !!!',
+    'isi.required' => 'Wajib Diisi !!',
 ]
 );
 
    // Simpan Foto
 
-   $file = Request()->foto_kegiatan;
+   $file = Request()->foto_berita;
    $filename = $file->getClientOriginalName();
-   $file->move(public_path('foto_kegiatan'), $filename);
+   $file->move(public_path('foto_berita'), $filename);
    $data = [
-    'nama_kegiatan' => Request()->nama_kegiatan,
-    'foto_kegiatan' => $filename,
-    'id_kecamatan' => Request()->id_kecamatan,
-    'posisi' => Request()->posisi,
-    'ket' => Request()->ket,
-    'waktu' => Request()->waktu,
-    'jml_anggota' => Request()->jml_anggota,
-    'alamat' => Request()->alamat,
+    'judul' => Request()->judul,
+    'foto_berita' => $filename,
+    'isi' => Request()->isi,
 ];
-$this->KegiatanModel->insertData($data);
-return redirect()->route('admin.kegiatan')->with('pesan','Data Kegiatan Berhasil ditambahkan!!');
-}
-function editKegiatan($id_kegiatan)
-{
-    $data = [
-        'kegiatan' => $this->KegiatanModel->detailData($id_kegiatan),
-        'kecamatan' => $this->KecamatanModel->AllData(),
-    ];
-    return view('dashboard.admin.kegiatan.v_edit',$data);
+$this->BeritaModel->insertData($data);
+return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil ditambahkan!!');
 }
 
-function updateKegiatan($id_kegiatan)
+function editBerita($id_berita)
+{
+    $data = [
+        'berita' => $this->BeritaModel->detailData($id_berita),
+    ];
+    return view('dashboard.admin.berita.v_edit',$data);
+}
+
+function updateBerita($id_berita)
 {
     {
        Request()->validate([
-        'nama_kegiatan'=>'required',
-        'foto_kegiatan'=>'image|mimes:jpeg,png,jpg|max:1024',
-        'id_kecamatan'=>'required',
-        'posisi'=>'required',
-        'ket'=>'required',
-        'waktu'=>'required',
-        'jml_anggota'=>'required',
-        'alamat'=>'required',
+        'judul'=>'required',
+        'foto_berita'=>'image|mimes:jpeg,png,jpg|max:1024',
+        'isi'=>'required',
 
     ],
     [
-     'nama_kegiatan.required' => 'Wajib Diisi !!',
-     'foto_kegiatan.max' => 'Foto Max 1024 Kb !!!',
-     'foto_kegiatan.image' => 'Foto Harus berformat Jpg, jpeg, dan Png !!!',
-     'id_kecamatan.required' => 'Wajib Diisi !!',
-     'posisi.required' => 'Wajib Diisi !!',
-     'ket.required' => 'Wajib Diisi !!',
-     'waktu.required' => 'Wajib Diisi !!',
-     'jml_anggota.required' => 'Wajib Diisi !!',
-     'alamat.required' => 'Wajib Diisi !!',
+    'judul.required' => 'Wajib Diisi !!',
+    'foto_berita.required' => 'Wajib Diisi !!',
+    'foto_berita.max' => 'Foto Max 1024 Kb !!!',
+    'foto_berita.image' => 'Foto Harus berformat Jpg, jpeg, dan Png !!!',
+    'isi.required' => 'Wajib Diisi !!',
  ]
 );
-       if (Request()->foto_kegiatan <>"") {
+       if (Request()->foto_berita <>"") {
    // Hapus Foto Lama
-        $kegiatan = $this->KegiatanModel->detailData($id_kegiatan);
-        if ($kegiatan->foto_kegiatan <> "") {
-            unlink(public_path('foto_kegiatan') . '/' . $kegiatan->foto_kegiatan);
+        $berita = $this->BeritaModel->detailData($id_berita);
+        if ($berita->foto_berita <> "") {
+            unlink(public_path('foto_berita') . '/' . $berita->foto_berita);
         }
 //Ganti foto
-    $file = Request()->foto_kegiatan;
-    $filename = $file->getClientOriginalName();
-    $file->move(public_path('foto_kegiatan'), $filename);
-    $data = [
-        'nama_kegiatan' => Request()->nama_kegiatan,
-        'foto_kegiatan' => $filename,
-        'id_kecamatan' => Request()->id_kecamatan,
-        'posisi' => Request()->posisi,
-        'ket' => Request()->ket,
-        'waktu' => Request()->waktu,
-        'jml_anggota' => Request()->jml_anggota,
-        'alamat' => Request()->alamat,
-    ];
-    $this->KegiatanModel->updateData($id_kegiatan, $data);
-}else{
+        $file = Request()->foto_berita;
+        $filename = $file->getClientOriginalName();
+        $file->move(public_path('foto_berita'), $filename);
+        $data = [
+            'judul' => Request()->judul,
+            'foto_berita' => $filename,
+            'isi' => Request()->isi,
+        ];
+        $this->BeritaModel->updateData($id_berita, $data);
+    }else{
     //Tidak ganti foto
-    $data = [
-        'nama_kegiatan' => Request()->nama_kegiatan,
-        'id_kecamatan' => Request()->id_kecamatan,
-        'posisi' => Request()->posisi,
-        'ket' => Request()->ket,
-        'waktu' => Request()->waktu,
-        'jml_anggota' => Request()->jml_anggota,
-        'alamat' => Request()->alamat,
-    ];
-}
-$this->KegiatanModel->updateData($id_kegiatan, $data);
-return redirect()->route('admin.kegiatan')->with('pesan','Data Kegiatan Berhasil diubah!!');
-
-}
-}
-
-function hapuskegiatan($id_kegiatan)
-{
-    $kegiatan = $this->KegiatanModel->detailData($id_kegiatan);
-    if ($kegiatan->foto_kegiatan <> "") {
-       unlink(public_path('foto_kegiatan') . '/' . $kegiatan->foto_kegiatan);
+        $data = [
+            'judul' => Request()->judul,
+            'isi' => Request()->isi,
+        ];
     }
-    $this->KegiatanModel->deleteData($id_kegiatan);
-    return redirect()->route('admin.kegiatan')->with('pesan','Data Kegiatan Berhasil dihapus!!');
+    $this->BeritaModel->updateData($id_berita, $data);
+    return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil diubah!!');
+
 }
-// End Kegiatan
+}
+    // Data List Admin
+function user()
+{
+        // $users = DB::select('select * from users where role=1');
+    $user = DB::table('users')->where('role', 1)->get();
+    return view('dashboard.admin.user',compact('user'));
+}
+function deleteUser($id)
+{
+    $user = User::findOrFail($id);
+    $user->delete();
+    return redirect()->route('admin.user')->with('pesan','Data Berhasil Di Hapus');
+}
+function add()
+{
+    return view('dashboard.admin.v_add_admin');
+}
+function insertAdmin(Request $request){
+    $request->validate([
+        'name'=>['required','string','max:255'],
+        'email'=>['required','string','email','max:255','unique:users'],
+        'password'=>['required','string','min:8','confirmed'],
+
+    ]);
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->role = 1;
+    $user->password = \Hash::make($request->password);
+    if ($user->save()) {
+        return redirect()->route('admin.user')->with('pesan','Data Berhasil di tambahkan');
+    }else{
+        return redirect()->back()->with('error','Gagal Tambah, Silahkan Coba Lagi');
+    }
+}
+// End Data List Admin
+function hapusBerita($id_berita)
+{
+    $berita = $this->BeritaModel->detailData($id_berita);
+    if ($berita->foto_berita <> "") {
+       unlink(public_path('foto_berita') . '/' . $berita->foto_berita);
+   }
+   $this->BeritaModel->deleteData($id_berita);
+   return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil dihapus!!');
+}
+// end berita
+
+function penyewaan()
+{
+   $penyewaan = PenyewaanModel::with('user')->get();
+   $data = [
+    'penyewaan' => $this->PenyewaanModel->AllData(),
+];
+return view('dashboard.admin.penyewaan.index', compact('penyewaan'),$data);
+}
+function pendaki()
+{
+   $pendaki = PendakianModel::with('user')->get();
+   $data = [
+    'pendaki' => $this->PendakianModel->AllData(),
+];
+return view('dashboard.admin.pendaki.index', compact('pendaki'),$data);
+}
+function addPendaki()
+{
+    $data = [
+        'pendaki' => $this->PendakianModel->AllData(),
+    ];
+    return view('dashboard.admin.pendaki.v_add', $data);
+}
+}
+
 function profile()
 {
     return view('dashboard.admin.profile');
@@ -306,43 +302,7 @@ function akun()
     $akun = DB::table('users')->where('role', 2)->get();
     return view('dashboard.admin.akun',compact('akun'));
 }
-    // Data List Admin
-function user()
-{
-        // $users = DB::select('select * from users where role=1');
-    $user = DB::table('users')->where('role', 1)->get();
-    return view('dashboard.admin.user',compact('user'));
-}
-function deleteUser($id)
-{
-    $user = User::findOrFail($id);
-    $user->delete();
-    return redirect()->route('admin.user')->with('pesan','Data Berhasil Di Hapus');
-}
-function add()
-{
-    return view('dashboard.admin.v_add_admin');
-}
-function insertAdmin(Request $request){
-    $request->validate([
-        'name'=>['required','string','max:255'],
-        'email'=>['required','string','email','max:255','unique:users'],
-        'password'=>['required','string','min:8','confirmed'],
 
-    ]);
-    $user = new User();
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->role = 1;
-    $user->password = \Hash::make($request->password);
-    if ($user->save()) {
-        return redirect()->route('admin.user')->with('pesan','Data Berhasil di tambahkan');
-    }else{
-        return redirect()->back()->with('error','Gagal Tambah, Silahkan Coba Lagi');
-    }
-}
-}
-// End Data List Admin
 
 
 function changePassword(Request $request){

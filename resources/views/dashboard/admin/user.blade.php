@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.admin-dash-layout')
-@section('title','Data User')
+@section('title','Data Admin')
 @section('content')
 <div class="container">
     <br>
@@ -58,7 +58,7 @@
                     <b>{{$data->name}}</b>
                 </div>
                 <div class="modal-footer">
-                    <a href="/admin/deleteUser/{{$data->id}}" class="btn btn-primary">Ya</a>
+                   <a href="/admin/deleteUser/{{$data->id}}" class="btn btn-primary">Yes Delete!</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>  
                 </div>
             </div>

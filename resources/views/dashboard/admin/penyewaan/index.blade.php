@@ -48,7 +48,7 @@
           <td>{{$data->nesting}}</td>
           <td>{{$data->kompor}}</td>
           <td>
-            <a href="/admin/editPenyewaan/{{ $data->id_penyewaan}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
+            <!-- <a href="/admin/editPenyewaan/{{ $data->id_penyewaan}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a> -->
             <button type="button" class="btn btn-sm btn-flat btn-danger" data-toggle="modal" data-target="#delete{{$data->id_penyewaan}}"><i class="fa fa-trash"></i>
             </button>
             <!-- <a href="/admin/hapuskegiatan/{{ $data->id_pendakian}}" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash"></i></a> -->
@@ -74,7 +74,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Apakah anda yakin ingin menghapus Data
+        Apakah anda yakin ingin menghapus Data Penyewaan Milik
         <b>{{$data->user->name}}</b>
       </div>
       <div class="modal-footer">

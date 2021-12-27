@@ -17,20 +17,20 @@ class PendakianModel extends Model
     {
         DB::table('tbl_pendaki')->insert($data);
     }
-    public function detailData($id_pendaki)
+    public function detailData($id_pendakian)
     {
-        return DB::table('tbl_pendaki')->where('id_pendaki',$id_pendaki)->first();
+        return DB::table('tbl_pendaki')->where('id_pendakian',$id_pendakian)->first();
     }
-    public function updateData($id_pendaki, $data)
+    public function updateData($id_pendakian, $data)
     {
         DB::table('tbl_pendaki')
-        ->where('id_pendaki',$id_pendaki)
+        ->where('id_pendakian',$id_pendakian)
         ->update($data);
     }
-    public function deleteData($id_pendaki)
+    public function deleteData($id_pendakian)
     {
         DB::table('tbl_pendaki')
-        ->where('id_pendaki',$id_pendaki)
+        ->where('id_pendakian',$id_pendakian)
         ->delete();
     }
 

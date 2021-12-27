@@ -56,10 +56,10 @@
           <td>{{$data->pekerjaan}}</td>
           <td>{{$data->anggota_pendaki}}</td>
           <td>
-            <a href="/admin/editPendaki/{{ $data->id_pendakian}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
+         <!--    <a href="/admin/editPendaki/{{ $data->id_pendakian}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a> -->
             <button type="button" class="btn btn-sm btn-flat btn-danger" data-toggle="modal" data-target="#delete{{$data->id_pendakian}}"><i class="fa fa-trash"></i>
             </button>
-            <!-- <a href="/admin/hapuskegiatan/{{ $data->id_pendakian}}" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash"></i></a> -->
+           <!--  <a href="/admin/hapusPendaki/{{ $data->id_pendakian}}" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash"></i></a> -->
           </td>
         </tr>
         @endforeach
@@ -82,12 +82,12 @@
         </button>
       </div>
       <div class="modal-body">
-        Apakah anda yakin ingin menghapus Berita
-        <b>{{$data->judul}}</b>
+        Apakah anda yakin ingin Menghapus Data Dengan Nama Ketua
+        <b>{{$data->user->name}}</b>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <a href="/admin/hapusBeria/{{ $data->id_berita}}" class="btn btn-primary">Yes Delete!</a>
+        <a href="/admin/hapusPendaki/{{ $data->id_pendakian}}" class="btn btn-primary">Yes Delete!</a>
       </div>
     </div>
   </div>

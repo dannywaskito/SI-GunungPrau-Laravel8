@@ -54,7 +54,7 @@ Route::group(['prefix'=>'admin','middleware'=>['isAdmin','auth','PreventBackHist
     Route::post('insertPendaki', [AdminController::class, 'insertPendaki']);
     Route::get('editPendaki/{id_pendaki}',[AdminController::class, 'editPendaki']);
     Route::post('updatePendaki/{id_pendaki}', [AdminController::class, 'updatePendaki']);
-    Route::get('hapusPendaki/{id_pendaki}', [AdminController::class, 'hapusPendaki']);
+    Route::get('hapusPendaki/{id_pendakian}', [AdminController::class, 'hapusPendaki']);
     // End Pendaki
            // penyewaan
     Route::get('penyewaan', [AdminController::class, 'penyewaan'])->name('admin.penyewaan');
@@ -62,7 +62,7 @@ Route::group(['prefix'=>'admin','middleware'=>['isAdmin','auth','PreventBackHist
     Route::post('insertPendaki', [AdminController::class, 'insertPendaki']);
     Route::get('editPenyewaan/{id_penyewaan}',[AdminController::class, 'editPenyewaan']);
     Route::post('updatePenyewaan/{id_penyewaan}', [AdminController::class, 'updatePenyewaan']);
-    Route::get('hapusPenyewaan/{id_penyewaan}', [AdminController::class, 'hapusPenyewaan']);
+    Route::get('hapusSewa/{id_penyewaan}', [AdminController::class, 'hapusSewa']);
     // End penyewaan
     // Kecamatan Controller
     Route::get('kecamatan', [AdminController::class, 'kecamatan'])->name('admin.kecamatan');

@@ -38,7 +38,7 @@
           <td>{{$data->email}}</td>
           <td>{{$data->notelp}}</td>
           <td>
-            <a href="/admin/editcontact/{{ $data->id_contact}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
+            <a href="/admin/editContact/{{ $data->id_contact}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
             <button type="button" class="btn btn-sm btn-flat btn-danger" data-toggle="modal" data-target="#delete{{$data->id_contact}}"><i class="fa fa-trash"></i>
             </button>
             <!-- <a href="/admin/hapuscontact/{{ $data->id_contact}}" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash"></i></a> -->
@@ -69,7 +69,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <a href="/admin/hapuscontact/{{ $data->id_contact}}" class="btn btn-primary">Yes Delete!</a>
+                    <a href="/admin/hapusContact/{{ $data->id_contact}}" class="btn btn-primary">Yes Delete!</a>
                 </div>
             </div>
         </div>

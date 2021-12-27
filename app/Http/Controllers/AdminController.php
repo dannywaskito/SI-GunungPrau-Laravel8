@@ -44,6 +44,44 @@ function addContact()
     ];
     return view('dashboard.admin.contact.v_add', $data);
 }
+function hapusContact($id_contact)
+{
+    $contact = $this->ContactModel->detailData($id_contact);
+   $this->ContactModel->deleteData($id_contact);
+   return redirect()->route('admin.contact')->with('pesan','Data Kontak Berhasil dihapus!!');
+}
+function editContact($id_contact)
+{
+    $data = [
+        'contact' => $this->ContactModel->detailData($id_contact),
+    ];
+    return view('dashboard.admin.contact.v_edit',$data);
+}
+
+function updateContact($id_contact)
+{
+    {
+       Request()->validate([
+        'email'=>'required',
+        'notelp'=>'required',
+
+    ],
+    [
+    'email.required' => 'Wajib Diisi !!',
+    'notelp.required' => 'Wajib Diisi !!',
+ ]
+);
+        $data = [
+            'email' => Request()->email,
+            'notelp' => Request()->notelp,
+        ];
+    }
+    $this->ContactModel->updateData($id_contact, $data);
+    return redirect()->route('admin.contact')->with('pesan','Data Contact Berhasil diubah!!');
+
+}
+}
+
 // Berita
 function berita()
 {
@@ -219,6 +257,12 @@ function penyewaan()
 ];
 return view('dashboard.admin.penyewaan.index', compact('penyewaan'),$data);
 }
+function hapusSewa($id_penyewaan)
+{
+    $penyewaan = $this->PenyewaanModel->detailData($id_penyewaan);
+   $this->PenyewaanModel->deleteData($id_penyewaan);
+   return redirect()->route('admin.penyewaan')->with('pesan','Data Penyewaan Berhasil dihapus!!');
+}
 function pendaki()
 {
    $pendaki = PendakianModel::with('user')->get();
@@ -234,7 +278,13 @@ function addPendaki()
     ];
     return view('dashboard.admin.pendaki.v_add', $data);
 }
+function hapusPendaki($id_pendakian)
+{
+    $pendaki = $this->PendakianModel->detailData($id_pendakian);
+   $this->PendakianModel->deleteData($id_pendakian);
+   return redirect()->route('admin.pendaki')->with('pesan','Data Pendaki Berhasil dihapus!!');
 }
+
 
 function profile()
 {

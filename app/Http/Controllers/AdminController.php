@@ -226,13 +226,6 @@ function addContact()
     ];
     return view('dashboard.admin.contact.v_add', $data);
 }
-
-function hapusContact($id_contact)
-{
-    $contact = $this->ContactModel->detailData($id_contact);
-   $this->ContactModel->deleteData($id_contact);
-   return redirect()->route('admin.contact')->with('pesan','Data Kontak Berhasil dihapus!!');
-}
 function editContact($id_contact)
 {
     $data = [
@@ -263,6 +256,13 @@ function updateContact($id_contact)
     return redirect()->route('admin.contact')->with('pesan','Data Contact Berhasil diubah!!');
 
 }
+function hapusContact($id_contact)
+{
+    $contact = $this->ContactModel->detailData($id_contact);
+   $this->ContactModel->deleteData($id_contact);
+   return redirect()->route('admin.contact')->with('pesan','Data Kontak Berhasil dihapus!!');
+}
+
 }
 
 

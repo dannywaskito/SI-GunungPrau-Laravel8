@@ -47,6 +47,15 @@ function addBerita()
     ];
     return view('dashboard.admin.berita.v_add', $data);
 }
+function hapusBerita($id_berita)
+{
+    $berita = $this->BeritaModel->detailData($id_berita);
+    if ($berita->foto_berita <> "") {
+       unlink(public_path('foto_berita') . '/' . $berita->foto_berita);
+   }
+   $this->BeritaModel->deleteData($id_berita);
+   return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil dihapus!!');
+}
 function insertBerita(Request $request)
 {
    $request->validate([
@@ -130,15 +139,7 @@ function updateBerita($id_berita)
     return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil diubah!!');
 
 }
-function hapusBerita($id_berita)
-{
-    $berita = $this->BeritaModel->detailData($id_berita);
-    if ($berita->foto_berita <> "") {
-       unlink(public_path('foto_berita') . '/' . $berita->foto_berita);
-   }
-   $this->BeritaModel->deleteData($id_berita);
-   return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil dihapus!!');
-}
+
 }
 function pendaki()
 {

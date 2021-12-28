@@ -30,57 +30,6 @@ class AdminController extends Controller
 
     return view('dashboard.admin.index');
 }
-function contact()
-{
-    $data = [
-        'contact' => $this->ContactModel->AllData(),
-    ];
-    return view('dashboard.admin.contact.index', $data);
-}
-function addContact()
-{
-    $data = [
-        'contact' => $this->ContactModel->AllData(),
-    ];
-    return view('dashboard.admin.contact.v_add', $data);
-}
-function hapusContact($id_contact)
-{
-    $contact = $this->ContactModel->detailData($id_contact);
-   $this->ContactModel->deleteData($id_contact);
-   return redirect()->route('admin.contact')->with('pesan','Data Kontak Berhasil dihapus!!');
-}
-function editContact($id_contact)
-{
-    $data = [
-        'contact' => $this->ContactModel->detailData($id_contact),
-    ];
-    return view('dashboard.admin.contact.v_edit',$data);
-}
-
-function updateContact($id_contact)
-{
-    {
-       Request()->validate([
-        'email'=>'required',
-        'notelp'=>'required',
-
-    ],
-    [
-    'email.required' => 'Wajib Diisi !!',
-    'notelp.required' => 'Wajib Diisi !!',
- ]
-);
-        $data = [
-            'email' => Request()->email,
-            'notelp' => Request()->notelp,
-        ];
-    }
-    $this->ContactModel->updateData($id_contact, $data);
-    return redirect()->route('admin.contact')->with('pesan','Data Contact Berhasil diubah!!');
-
-}
-}
 
 // Berita
 function berita()
@@ -98,26 +47,6 @@ function addBerita()
     ];
     return view('dashboard.admin.berita.v_add', $data);
 }
-function insertContact(Request $request)
-{
-   $request->validate([
-    'email'=>'required',
-    'notelp'=>'required',
-
-],
-[
-    'email.required' => 'Wajib Diisi !!',
-    'notelp.required' => 'Wajib Diisi !!',
-]
-);
-   $data = [
-    'email' => Request()->email,
-    'notelp' => Request()->notelp,
-];
-$this->ContactModel->insertData($data);
-return redirect()->route('admin.contact')->with('pesan','Contact Berhasil ditambahkan!!');
-}
-
 function insertBerita(Request $request)
 {
    $request->validate([
@@ -201,8 +130,52 @@ function updateBerita($id_berita)
     return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil diubah!!');
 
 }
+function hapusBerita($id_berita)
+{
+    $berita = $this->BeritaModel->detailData($id_berita);
+    if ($berita->foto_berita <> "") {
+       unlink(public_path('foto_berita') . '/' . $berita->foto_berita);
+   }
+   $this->BeritaModel->deleteData($id_berita);
+   return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil dihapus!!');
 }
-    // Data List Admin
+}
+function pendaki()
+{
+   $pendaki = PendakianModel::with('user')->get();
+   $data = [
+    'pendaki' => $this->PendakianModel->AllData(),
+];
+return view('dashboard.admin.pendaki.index', compact('pendaki'),$data);
+}
+function addPendaki()
+{
+    $data = [
+        'pendaki' => $this->PendakianModel->AllData(),
+    ];
+    return view('dashboard.admin.pendaki.v_add', $data);
+}
+function hapusPendaki($id_pendakian)
+{
+    $pendaki = $this->PendakianModel->detailData($id_pendakian);
+   $this->PendakianModel->deleteData($id_pendakian);
+   return redirect()->route('admin.pendaki')->with('pesan','Data Pendaki Berhasil dihapus!!');
+}
+function penyewaan()
+{
+   $penyewaan = PenyewaanModel::with('user')->get();
+   $data = [
+    'penyewaan' => $this->PenyewaanModel->AllData(),
+];
+return view('dashboard.admin.penyewaan.index', compact('penyewaan'),$data);
+}
+function hapusSewa($id_penyewaan)
+{
+    $penyewaan = $this->PenyewaanModel->detailData($id_penyewaan);
+   $this->PenyewaanModel->deleteData($id_penyewaan);
+   return redirect()->route('admin.penyewaan')->with('pesan','Data Penyewaan Berhasil dihapus!!');
+}
+  // Data List Admin
 function user()
 {
         // $users = DB::select('select * from users where role=1');
@@ -238,52 +211,68 @@ function insertAdmin(Request $request){
     }
 }
 // End Data List Admin
-function hapusBerita($id_berita)
-{
-    $berita = $this->BeritaModel->detailData($id_berita);
-    if ($berita->foto_berita <> "") {
-       unlink(public_path('foto_berita') . '/' . $berita->foto_berita);
-   }
-   $this->BeritaModel->deleteData($id_berita);
-   return redirect()->route('admin.berita')->with('pesan','Data Berita Berhasil dihapus!!');
-}
-// end berita
-
-function penyewaan()
-{
-   $penyewaan = PenyewaanModel::with('user')->get();
-   $data = [
-    'penyewaan' => $this->PenyewaanModel->AllData(),
-];
-return view('dashboard.admin.penyewaan.index', compact('penyewaan'),$data);
-}
-function hapusSewa($id_penyewaan)
-{
-    $penyewaan = $this->PenyewaanModel->detailData($id_penyewaan);
-   $this->PenyewaanModel->deleteData($id_penyewaan);
-   return redirect()->route('admin.penyewaan')->with('pesan','Data Penyewaan Berhasil dihapus!!');
-}
-function pendaki()
-{
-   $pendaki = PendakianModel::with('user')->get();
-   $data = [
-    'pendaki' => $this->PendakianModel->AllData(),
-];
-return view('dashboard.admin.pendaki.index', compact('pendaki'),$data);
-}
-function addPendaki()
+function contact()
 {
     $data = [
-        'pendaki' => $this->PendakianModel->AllData(),
+        'contact' => $this->ContactModel->AllData(),
     ];
-    return view('dashboard.admin.pendaki.v_add', $data);
+    return view('dashboard.admin.contact.index', $data);
 }
-function hapusPendaki($id_pendakian)
+function addContact()
 {
-    $pendaki = $this->PendakianModel->detailData($id_pendakian);
-   $this->PendakianModel->deleteData($id_pendakian);
-   return redirect()->route('admin.pendaki')->with('pesan','Data Pendaki Berhasil dihapus!!');
+    $data = [
+        'contact' => $this->ContactModel->AllData(),
+    ];
+    return view('dashboard.admin.contact.v_add', $data);
 }
+
+function hapusContact($id_contact)
+{
+    $contact = $this->ContactModel->detailData($id_contact);
+   $this->ContactModel->deleteData($id_contact);
+   return redirect()->route('admin.contact')->with('pesan','Data Kontak Berhasil dihapus!!');
+}
+function editContact($id_contact)
+{
+    $data = [
+        'contact' => $this->ContactModel->detailData($id_contact),
+    ];
+    return view('dashboard.admin.contact.v_edit',$data);
+}
+
+function updateContact($id_contact)
+{
+    {
+       Request()->validate([
+        'email'=>'required',
+        'notelp'=>'required',
+
+    ],
+    [
+    'email.required' => 'Wajib Diisi !!',
+    'notelp.required' => 'Wajib Diisi !!',
+ ]
+);
+        $data = [
+            'email' => Request()->email,
+            'notelp' => Request()->notelp,
+        ];
+    }
+    $this->ContactModel->updateData($id_contact, $data);
+    return redirect()->route('admin.contact')->with('pesan','Data Contact Berhasil diubah!!');
+
+}
+}
+
+
+
+
+  
+
+// end berita
+
+
+
 
 
 function profile()

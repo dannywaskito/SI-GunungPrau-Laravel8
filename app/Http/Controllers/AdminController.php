@@ -226,6 +226,25 @@ function addContact()
     ];
     return view('dashboard.admin.contact.v_add', $data);
 }
+function insertContact(Request $request)
+{
+   $request->validate([
+    'email'=>'required',
+    'notelp'=>'required',
+
+],
+[
+    'email.required' => 'Wajib Diisi !!',
+    'notelp.required' => 'Wajib Diisi !!',
+]
+);
+   $data = [
+    'email' => Request()->email,
+    'notelp' => Request()->notelp,
+];
+$this->ContactModel->insertData($data);
+return redirect()->route('admin.contact')->with('pesan','Contact Berhasil ditambahkan!!');
+}
 function editContact($id_contact)
 {
     $data = [
